@@ -10,7 +10,7 @@ const App = () => {
     <>
       <SearchBar setTerm={setTerm} />
       <Switch>
-        <Route path='/'>
+        <Route exact path='/'>
           <Homepage term={term} />
         </Route>
         <Route path='/:page'>

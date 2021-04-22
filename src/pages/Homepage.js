@@ -5,12 +5,13 @@ import { useParams } from 'react-router-dom';
 function Homepage({ term }) {
   let { page } = useParams();
   const [searchResults, setSearchResults] = useState([]);
+  const [totalPages, setTotalPages] = useState(1);
   console.log(page);
   useEffect(() => {
     console.log(term);
     const search = async () => {
       fetch(
-        `https://api.github.com/search/users?q=${term}&per_page=20&sort=followers`,
+        `https://api.github.com/search/users?q=${term}&per_page=20&sort=followers&page=${+page}`,
         {
           headers: {
             Accept: 'application/vnd.github.v3+json',
@@ -22,6 +23,7 @@ function Homepage({ term }) {
         })
         .then((data) => {
           console.log(data);
+          setTotalPages(Math.ceil(data.total_count / 20));
           setSearchResults(data.items);
         });
     };
@@ -36,6 +38,7 @@ function Homepage({ term }) {
             <ListItem key={user.login} user={user} />
           ))}
       </ul>
+      {totalPages}
     </div>
   );
 }
