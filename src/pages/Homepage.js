@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
 import ListItem from '../components/ListItem';
-import { useParams } from 'react-router-dom';
+import { useParams, NavLink } from 'react-router-dom';
 
 function Homepage({ term }) {
   let { page } = useParams();
+  if (isNaN(page)) page = 1;
+  page = +page;
   const [searchResults, setSearchResults] = useState([]);
   const [totalPages, setTotalPages] = useState(1);
   console.log(page);
@@ -11,7 +13,7 @@ function Homepage({ term }) {
     console.log(term);
     const search = async () => {
       fetch(
-        `https://api.github.com/search/users?q=${term}&per_page=20&sort=followers&page=${+page}`,
+        `https://api.github.com/search/users?q=${term}&per_page=20&sort=followers&page=${page}`,
         {
           headers: {
             Accept: 'application/vnd.github.v3+json',
@@ -28,7 +30,7 @@ function Homepage({ term }) {
         });
     };
     search();
-  }, [term]);
+  }, [term, page]);
 
   return (
     <div className='App'>
@@ -38,6 +40,16 @@ function Homepage({ term }) {
             <ListItem key={user.login} user={user} />
           ))}
       </ul>
+      {page >= 2 && 2 < totalPages && (
+        <NavLink to={'/' + (page - 1)} exact>
+          Previous Page
+        </NavLink>
+      )}
+      {page < totalPages && (
+        <NavLink to={'/' + (page + 1)} exact>
+          Next Page
+        </NavLink>
+      )}
       {totalPages}
     </div>
   );
