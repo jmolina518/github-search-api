@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import ListItem from './components/ListItem'
 
 function App() {
   const [searchResults, setSearchResults] = useState([])
@@ -34,7 +35,10 @@ function App() {
         <button type='submit'>Search</button>
       </form>
       <ul>
-        {searchResults && searchResults.map((item) => <li>{item.login}</li>)}
+        {searchResults &&
+          searchResults.map((user) => (
+            <ListItem key={user.login} user={user} />
+          ))}
       </ul>
     </div>
   )
