@@ -1,28 +1,31 @@
-import { useState } from 'react'
-import ListItem from './components/ListItem'
+import { useState } from 'react';
+import ListItem from './components/ListItem';
 
 function App() {
-  const [searchResults, setSearchResults] = useState([])
-  const [inputResult, setInputResult] = useState('')
+  const [searchResults, setSearchResults] = useState([]);
+  const [inputResult, setInputResult] = useState('');
 
   const search = (event) => {
-    event.preventDefault()
-    fetch(`https://api.github.com/search/users?q=${inputResult}`, {
-      headers: {
-        Accept: 'application/vnd.github.v3+json',
-      },
-    })
+    event.preventDefault();
+    fetch(
+      `https://api.github.com/search/users?q=${inputResult}&per_page=20&sort=followers`,
+      {
+        headers: {
+          Accept: 'application/vnd.github.v3+json',
+        },
+      }
+    )
       .then((res) => {
-        return res.json()
+        return res.json();
       })
       .then((data) => {
-        console.log(data)
-        setSearchResults(data.items)
-      })
-  }
+        console.log(data);
+        setSearchResults(data.items);
+      });
+  };
   const handleChange = (event) => {
-    setInputResult(event.target.value)
-  }
+    setInputResult(event.target.value);
+  };
   return (
     <div className='App'>
       <form onSubmit={search}>
@@ -41,7 +44,7 @@ function App() {
           ))}
       </ul>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
