@@ -5,12 +5,10 @@ import { useState } from 'react';
 
 const App = () => {
   const [term, setTerm] = useState('');
-  const handleChange = (event) => {
-    setTerm(event.target.value);
-  };
+
   return (
     <>
-      <SearchBar term={term} setTerm={handleChange} />
+      <SearchBar setTerm={setTerm} />
       <Switch>
         <Route path='/'>
           <Homepage term={term} />

@@ -3,10 +3,11 @@ import ListItem from '../components/ListItem';
 import { useParams } from 'react-router-dom';
 
 function Homepage({ term }) {
-  let { slug } = useParams();
+  let { page } = useParams();
   const [searchResults, setSearchResults] = useState([]);
-
+  console.log(page);
   useEffect(() => {
+    console.log(term);
     const search = async () => {
       fetch(
         `https://api.github.com/search/users?q=${term}&per_page=20&sort=followers`,
