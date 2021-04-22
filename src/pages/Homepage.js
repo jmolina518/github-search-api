@@ -26,7 +26,7 @@ function Homepage({ term }) {
         .then((data) => {
           console.log(data);
           setTotalPages(Math.ceil(data.total_count / 20));
-          setSearchResults(data.items);
+          setSearchResults(data);
         });
     };
     search();
@@ -35,10 +35,9 @@ function Homepage({ term }) {
   return (
     <div className='App'>
       <ul>
-        {searchResults &&
-          searchResults.map((user) => (
-            <ListItem key={user.login} user={user} />
-          ))}
+        {searchResults?.items?.map((user) => (
+          <ListItem key={user.login} user={user} />
+        ))}
       </ul>
       {page >= 2 && 2 < totalPages && (
         <NavLink to={'/' + (page - 1)} exact>
@@ -50,7 +49,9 @@ function Homepage({ term }) {
           Next Page
         </NavLink>
       )}
-      {totalPages}
+      {searchResults.items && (
+        <div>Total count:{searchResults?.total_count}</div>
+      )}
     </div>
   );
 }
