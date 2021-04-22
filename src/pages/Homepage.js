@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 import ListItem from '../components/ListItem';
-import { useParams, NavLink } from 'react-router-dom';
+import { useParams, NavLink, useHistory } from 'react-router-dom';
 
 function Homepage({ term }) {
+  let history = useHistory();
   let { page } = useParams();
   if (isNaN(page)) page = 1;
   page = +page;
@@ -31,6 +32,10 @@ function Homepage({ term }) {
     };
     search();
   }, [term, page]);
+
+  useEffect(() => {
+    history.push('/');
+  }, [term, history]);
 
   return (
     <div className='App'>
