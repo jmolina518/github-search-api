@@ -9,12 +9,10 @@ function Homepage({ term }) {
   page = +page;
   const [searchResults, setSearchResults] = useState([]);
   const [totalPages, setTotalPages] = useState(1);
-  console.log(page);
   useEffect(() => {
-    console.log(term);
     const search = async () => {
       fetch(
-        `https://api.github.com/search/users?q=${term}&per_page=20&sort=followers&page=${page}`,
+        `https://api.github.com/search/users?q=${term}&per_page=5&sort=followers&page=${page}`,
         {
           headers: {
             Accept: 'application/vnd.github.v3+json',
@@ -25,12 +23,13 @@ function Homepage({ term }) {
           return res.json();
         })
         .then((data) => {
-          console.log(data);
-          setTotalPages(Math.ceil(data.total_count / 20));
+          setTotalPages(Math.ceil(data.total_count / 5));
           setSearchResults(data);
         });
     };
-    search();
+    if (term) {
+      search();
+    }
   }, [term, page]);
 
   useEffect(() => {

@@ -1,3 +1,4 @@
+import './styles/styles.css';
 import Homepage from './pages/Homepage';
 import SearchBar from './components/SearchBar';
 import { Switch, Route } from 'react-router-dom';
