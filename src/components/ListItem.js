@@ -12,15 +12,28 @@ export default function ListItem({ user }) {
         return res.json();
       })
       .then((data) => {
-        console.log(data);
         setUserData(data);
+        console.log(data);
       });
   }, []);
   return (
-    <li className='red'>
-      {user.login}
-      <img src={user.avatar_url} />
-      {userData.followers}
+    <li>
+      <div className='card' style={{ width: '18rem' }}>
+        <img
+          src={user.avatar_url}
+          alt='profile-picture'
+          className='card-img-top'
+        />
+        <div className='card-body'>
+          <p className='card-title'>Name: {userData.name}</p>
+          <p className='card-text'>Username: {user.login}</p>
+          <p className='card-text'>Followers: {userData.followers}</p>
+          <p className='card-text'>Twitter: {userData.twitter_username}</p>
+          <a href={userData.html_url} className='btn btn-primary'>
+            GitHub Profile
+          </a>
+        </div>
+      </div>
     </li>
   );
 }
