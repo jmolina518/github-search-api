@@ -13,9 +13,8 @@ export default function ListItem({ user }) {
       })
       .then((data) => {
         setUserData(data);
-        console.log(data);
       });
-  }, []);
+  }, [user.url]);
   return (
     <li className='list-unstyled album py-5 bg-light col-md-6'>
       <div className='container-fluid'>
