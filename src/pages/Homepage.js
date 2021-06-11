@@ -38,7 +38,7 @@ function Homepage({ term }) {
 
   return (
     <div className='App'>
-      <ul className='row'>
+      <ul className='cards-container'>
         {searchResults?.items?.map((user) => (
           <ListItem key={user.login} user={user} />
         ))}

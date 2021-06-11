@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import '../styles/styles.scss';
 
 export default function ListItem({ user }) {
   const [userData, setUserData] = useState({});
@@ -16,31 +17,19 @@ export default function ListItem({ user }) {
       });
   }, [user.url]);
   return (
-    <li className='list-unstyled album py-5 bg-light col-md-6'>
-      <div className='container-fluid'>
-        <div className='row justify-content-center'>
-          <div className='col-lg-8'>
-            <div className='card'>
-              <img
-                src={user.avatar_url}
-                alt='profile-avatar'
-                className='card-img-top'
-              />
-              <div className='card-body'>
-                <p className='card-title'>Name: {userData.name}</p>
-                <p className='card-text'>Username: {user.login}</p>
-                <p className='card-text'>Followers: {userData.followers}</p>
-                <p className='card-text'>
-                  Twitter: {userData.twitter_username}
-                </p>
-                <a href={userData.html_url} className='btn btn-primary'>
-                  GitHub Profile
-                </a>
-              </div>
-            </div>
-          </div>
+    <div className='cards-container'>
+      <div className='card-component'>
+        <img src={user.avatar_url} alt='profile-avatar' className='card-img' />
+        <div className='card-body'>
+          <p>Name: {userData.name}</p>
+          <p>Username: {user.login}</p>
+          <p>Followers: {userData.followers}</p>
+          <p>Twitter: {userData.twitter_username}</p>
+          <a href={userData.html_url}>
+            <button className='card-button'>GitHub Profile</button>
+          </a>
         </div>
       </div>
-    </li>
+    </div>
   );
 }
