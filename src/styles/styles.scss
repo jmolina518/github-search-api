@@ -60,8 +60,6 @@
   flex-direction: row;
   align-items: center;
 }
-.search-bar {
-}
 
 .search-button {
   background-color: #4caf50;
@@ -76,6 +74,11 @@
   display: inline-block;
   font-size: 16px;
   transition-duration: 0.2s;
+}
+
+.pagination {
+  padding-bottom: 50px;
+  text-align: center;
 }
 
 .search-button:hover,

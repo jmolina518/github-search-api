@@ -43,19 +43,21 @@ function Homepage({ term }) {
           <ListItem key={user.login} user={user} />
         ))}
       </ul>
-      {page >= 2 && 2 < totalPages && (
-        <NavLink to={'/' + (page - 1)} exact>
-          Previous Page
-        </NavLink>
-      )}
-      {page < totalPages && (
-        <NavLink to={'/' + (page + 1)} exact>
-          Next Page
-        </NavLink>
-      )}
-      {searchResults.items && (
-        <div>Total count:{searchResults?.total_count}</div>
-      )}
+      <div className='pagination'>
+        {page >= 2 && 2 < totalPages && (
+          <NavLink to={'/' + (page - 1)} exact>
+            Previous Page
+          </NavLink>
+        )}
+        {page < totalPages && (
+          <NavLink to={'/' + (page + 1)} exact>
+            Next Page
+          </NavLink>
+        )}
+        {searchResults.items && (
+          <div>Total count:{searchResults?.total_count}</div>
+        )}
+      </div>
     </div>
   );
 }
